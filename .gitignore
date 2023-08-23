@@ -1,0 +1,22 @@
+# Python-related files and directories
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual environment
+venv/
+env/
+
+# Editor and system files
+.DS_Store
+.vscode/
+
+
+#Linting
+.pylintrc
+pyproject.toml
+
+#Windows thumbnails
+*desktop.ini
+
+
