@@ -1,5 +1,6 @@
 
-from bnb_tree import BnB_Tree
+from src.bnb_tree import BnB_Tree
+from src.instance_parser import get_CGLSP_instance_cost_matrix
 import sys
 import time
 from pathlib import Path
@@ -14,7 +15,7 @@ class CGLSP:
     def __init__(self, problem_instance, problem_type, update_frequency):
 
         if problem_type == "CGLSP":
-            root_cost_matrix = self.get_CGLSP_instance_cost_matrix(
+            root_cost_matrix = get_CGLSP_instance_cost_matrix(
                 problem_instance)
 
         else:
@@ -43,31 +44,6 @@ class CGLSP:
             print(f"Solving TSPLIB ASTP instance with {self.num_coils} cities \n")
             print("The cost matrix for this instance is: \n")
             print(root_cost_matrix)
-
-    def get_CGLSP_instance_cost_matrix(self, instance_file_path):
-        # get raw cost matrix from problem instance text file
-        cost_matrix_raw = np.loadtxt(
-            instance_file_path, dtype=int, delimiter=";")
-
-        # insert an initial row and column for a dummy job to convert the problem into
-        # an ASTP instead of a min Hamiltonian path problem
-
-        # number of jobs = n
-        n = cost_matrix_raw.shape[0]
-
-        cost_matrix_augmented = np.zeros((n + 1, n + 1), dtype=int)
-        cost_matrix_augmented[0, 0] = -1
-
-        # insert cost matrix for real jobs into augmented cost matrix with dummy job
-        cost_matrix_augmented[1:, 1:] = cost_matrix_raw
-
-        # replace -1 in cost_matrix with "NA" as per Google_OR_TOOLS AP solver
-        # specification
-
-        cost_matrix_augmented = cost_matrix_augmented.astype(object)
-        cost_matrix_augmented[cost_matrix_augmented == -1] = "NA"
-
-        return cost_matrix_augmented
 
     def solve(self):
 
@@ -192,7 +168,7 @@ if __name__ == "__main__":
 
         elif problem_type == "TSPLIB":
 
-            from package_verfication import get_cost_matrix_br17_atsp
+            from algorithm_verification.br17 import get_cost_matrix_br17_atsp
             cost_matrix = get_cost_matrix_br17_atsp()
             problem_instance = cost_matrix
 

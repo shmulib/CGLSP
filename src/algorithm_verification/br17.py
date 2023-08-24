@@ -29,3 +29,7 @@ def get_cost_matrix_br17_atsp():
     cost_matrix[cost_matrix == 9999] = "NA"
 
     return cost_matrix
+
+
+cost_matrix = get_cost_matrix_br17_atsp()
+print(cost_matrix)

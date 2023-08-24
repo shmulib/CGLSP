@@ -1,22 +1,20 @@
-from instance_parser import instance_to_cost_matrix
+from src.instance_parser import get_CGLSP_instance_cost_matrix
 import numpy as np
 import time
 
 
 def brute_force_AP_solver(cost_matrix):
 
-
-    start_time = time.time() 
+    start_time = time.time()
 
     print("Solving Assignment Problem using Brute Force \n")
 
     print("Cost Matrix: \n", cost_matrix, "\n")
-    
-    #generate all feasible solutions
+
+    # generate all feasible solutions
     feasible_sols = generate_feasible_solutions(cost_matrix)
 
-
-    #find the min cost feasbile solution
+    # find the min cost feasbile solution
     if feasible_sols:
 
         print("Finding feasible solution with min cost: ")
@@ -37,7 +35,6 @@ def brute_force_AP_solver(cost_matrix):
 
         print("\nBest Solution: ")
 
-
         print(f"\nTotal cost = {min_cost}\n")
 
         num_jobs = len(best_sol)
@@ -49,14 +46,12 @@ def brute_force_AP_solver(cost_matrix):
                 + f"  Cost = {best_assignment_costs[i]}"
             )
 
-        
         print("\nSolve Time = ",  format(elapsed_time, '.6f'), "seconds")
-        
+
     else:
         print("No feasible solutions. Assignment is not possible.")
 
-    return best_sol, best_assignment_costs, min_cost 
-
+    return best_sol, best_assignment_costs, min_cost
 
 
 def generate_feasible_solutions(cost_matrix):
@@ -65,23 +60,24 @@ def generate_feasible_solutions(cost_matrix):
 
     cost_matrix = cost_matrix.tolist()
 
-    n= len(cost_matrix)
+    n = len(cost_matrix)
 
     feasible_solutions = []
-    
-    partial_solutions  = [{"path":[(0,i)], "used_cols": {i}, "cur_row":0 }  for i in range(1,n)]
+
+    partial_solutions = [{"path": [(0, i)], "used_cols": {i}, "cur_row": 0} for i in range(1, n)]
     while partial_solutions:
       #  print(partial_solutions)
-        
+
         curr_path_object = partial_solutions.pop(0)
         curr_path = curr_path_object["path"]
         next_row = curr_path_object["cur_row"] + 1
 
         used_cols = curr_path_object["used_cols"]
-        next_row_feasible_cols = {index for index, cost in enumerate(cost_matrix[next_row]) if cost!="NA" and index != next_row} - used_cols
+        next_row_feasible_cols = {index for index, cost in enumerate(
+            cost_matrix[next_row]) if cost != "NA" and index != next_row} - used_cols
         for col in next_row_feasible_cols:
             updated_path = curr_path.copy()
-            updated_path.append((next_row,col))
+            updated_path.append((next_row, col))
             if len(updated_path) == n:
                 feasible_solutions.append(updated_path)
                # print("feasible soloutions", feasible_solutions)
@@ -90,17 +86,17 @@ def generate_feasible_solutions(cost_matrix):
                 cur_row = next_row
                 updated_path_object = {"path": updated_path, "used_cols": new_used_cols, "cur_row": cur_row}
                 partial_solutions.append(updated_path_object)
-            
+
     print(f"There are {len(feasible_solutions)} feasible solutions \n")
-    
+
     return feasible_solutions
 
 
 def feasible_sol_cost(sol, cost_matrix):
 
-    #cost matrix is a 2d numpy array, #TO DO - add Typing
+    # cost matrix is a 2d numpy array, #TO DO - add Typing
 
-    row_indices= [edge[0] for edge in sol ]
+    row_indices = [edge[0] for edge in sol]
 
     col_indices = [edge[1] for edge in sol]
 
@@ -113,34 +109,24 @@ def feasible_sol_cost(sol, cost_matrix):
 
 if __name__ == "__main__":
 
-    #n=3
+    # n=3
 
-    cost_matrix = np.array([[i*j for i in range(4)] for j in range(4)] )
- 
-    
-    # feasible_sols = generate_feasible_solutions(cost_matrix)
+    # cost_matrix = np.array([[i*j for i in range(4)] for j in range(4)] )
 
-    # first_sol = feasible_sols[0]
+    # # feasible_sols = generate_feasible_solutions(cost_matrix)
 
-    # print("Sol: ", first_sol)
-    # cost = feasible_sol_cost(first_sol, cost_matrix)
-    # print("Sol Cost": cost)
+    # # first_sol = feasible_sols[0]
 
-    best_sol, best_assignment_costs, min_cost = brute_force_AP_solver(cost_matrix)
+    # # print("Sol: ", first_sol)
+    # # cost = feasible_sol_cost(first_sol, cost_matrix)
+    # # print("Sol Cost": cost)
 
+    # best_sol, best_assignment_costs, min_cost = brute_force_AP_solver(cost_matrix)
 
+    instance_file_path = r"C:\Users\Shmuli\Desktop\Optimization\CGLSP\problem_instances\CGLSP_instances\data\cgl_17.txt"
+    cost_matrix = get_CGLSP_instance_cost_matrix(instance_file_path)
+    print(cost_matrix)
 
+    best_sol, min_cost = brute_force_AP_solver(cost_matrix)
 
-    # instance_file_path = r"C:\Users\Shmuli\Desktop\Optimization\CGLSP\problem_instances\data\cgl_17.txt"
-    # cost_matrix =  instance_to_cost_matrix(r"C:\Users\Shmuli\Desktop\Optimization\CGLSP\problem_instances\data\cgl_17.txt")
-    # print(cost_matrix)
-
-
-    # best_sol, min_cost = brute_force_AP_solver_cost_matrix(cost_matrix)
-
-    # print("Best Sol: ", best_sol, "Min Cost: ", min_cost)
-
-
-
-
-
+    print("Best Sol: ", best_sol, "Min Cost: ", min_cost)

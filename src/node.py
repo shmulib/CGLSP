@@ -1,7 +1,6 @@
-from MAP_solver import google_or_AP_solver
+from src.MAP_solver import google_or_AP_solver
 import numpy as np
 import time
-from timeout_decorator import timeout
 
 
 class Node:

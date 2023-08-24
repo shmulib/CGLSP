@@ -1,2 +1,2 @@
 Problem Instance,# Coils to sequence,Min Cost,Optimal Sequence,Solve Time (s),# Explored Subproblems
-cgl_17,17,4422,"[3, 1, 2, 4, 5, 6, 7, 8, 17, 10, 12, 15, 11, 13, 9, 16, 14]",0.2916,1866
+cgl_17,17,4422,"[3, 1, 2, 4, 5, 6, 7, 8, 17, 10, 12, 15, 11, 13, 9, 16, 14]",0.2887,1866

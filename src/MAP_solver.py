@@ -1,9 +1,7 @@
 """Solve assignment problem using linear assignment solver."""
 import numpy as np
-
-from ortools.graph.python import linear_sum_assignment
-
 import time
+from ortools.graph.python import linear_sum_assignment
 
 
 def google_or_AP_solver(cost_matrix):

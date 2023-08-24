@@ -1,7 +1,7 @@
 import numpy as np
 import queue
-from node import Node
-from MAP_solver import PossibleOverflowException
+from src.node import Node
+from src.MAP_solver import PossibleOverflowException
 
 
 class BnB_Tree:
