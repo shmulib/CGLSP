@@ -136,14 +136,27 @@ this solver uses to solve it, can be found in the docs [here](docs/CGLSP_graph_f
 
 ## Codebase Structure
 
-TThis repo implements a solver for the CGLSP sequencing problem. The structure of the codebase is described in the docs [here](docs/codebase_structure.md)
+This repo implements a solver for the CGLSP sequencing problem. The structure of the codebase is described in the docs [here](docs/codebase_structure.md)
 
 ## Results obtained used this solver
 
-Results so far
-Problems encountered - GCGLPS_26 can't find tight enough LBs
-                    - TSPLIP br17 is solved exactly, but tree grows relatively large
-                    - even though optimal solution is found, because branching results in subproblems with very low LB, not feasible sols to CGLSP, only to the relaxation
+This solver is used to find optimal solutions for CGLSP sequencing problem instances. The solver implements a variant of a branch and bound algorithm.
+
+Utilizing the current implementation, without the addtional optimization improvements suggested in the improvements [section](#ideas-for-optimization-algorithm-improvement), the solver can solve the following instances to optimality
+
+- The CGLSP instance with 17 coils \- cgl_17
+    - The current solver, solves cgl_17 to optimality in about 0.30s, demonstrating that it can potentially solve instances very quickly.
+- The TSPLIB (ASTP) instance  \- br17
+    - This is not an CGLSP instance, but the graph theory formulation is the same as a CGLSP instance
+    - The solver finds the known optimal solution, which is both, proof of correctness, as well as evidence of the solver's ability to solve instances
+      of this size for the CGLSP.
+    - As the optimal cost for the br17 instance is known, we have determined that the optimal solution is found early on in the branch and bound algorithm, but the lower bounds determined for subproblems remain lower than the optimal solution for a relatively large number of subproblems that are branched to. Improvements in choice of branching variables and order of subproblems considered, explained in the possible solver improvements [section](#ideas-for-optimization-algorithm-improvement), may help reduce the size to which the branch and bound tree grows for this instance.
+
+Instances attempted to be solved by the solver, but that don't currently terminate:
+
+- The next largest CGLSP instance with 26 coils - CGLSP_26
+    - The solver hasn't terminated when run for about 20 minutes, beacuse the branch and bound tree continues to grow. This occurs because the upper bounds obtained through finding optimal solutions of the Modified Assignment Problem (CGLSP relxation) for the subproblems which are CGLSP feasible, are not lower than a large number of the lower bounds obtained for explored subproblems, and so these subproblems are branched on instead of pruned, resulting in a very inefficient branch and bound search. 
+    - The improvements suggested [below](#ideas-for-optimization-algorithm-improvement) may bring this and other larger CGSLP instances into reach of the solver.
 
 
 ## Ideas for optimization algorithm improvement
