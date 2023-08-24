@@ -18,7 +18,7 @@ Problems encountered - GCGLPS_26 can't find tight enough LBs
 
 - [Installation](#installation)
 - [Usage](#usage)
-- [Problem Description and Solution Approach](problem-description-and-solution-approach)
+- [Problem Description and Solution Approach](#problem-description-and-solution-approach)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -47,7 +47,6 @@ pip install -r requirements.txt'''
 ## Results obtained used this solver
 
 ## Ideas for optimization algorithm improvement
-
 
 
 
