@@ -1,4 +1,11 @@
 
+Problem Description in context
+Graph theory formulation
+Mathematical description of solution
+Description of how the algorithm is implemented in code -
+
+
+
 Applied Problem: 
 I found a real sequencing problem for the galvanizing of steel coils. Spanish academics published research about this problem where they were employed by a Spanish steel manufacturer. (I've included the paper in the git repo).
 
@@ -15,6 +22,12 @@ Moreover, not all sequences are allowed as some coils may not be coated consecut
 
 
 Graph Theoretic Formulation:
+
+
+This sequencing problem can be formulated as finding the miminum cost Hamiltonian path in an incomplete asymmetric weighted graph.
+
+The
+
 
 The theoretical optimization problem can be formulated as finding the minimum cost Hamiltonian path in an asymmetric, incomplete graph.
 
