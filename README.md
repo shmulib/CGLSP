@@ -114,7 +114,7 @@ This csv results file contains the following fields:
 - -Min (Optimal) Cost,
 - Optimal Sequence,
 - Solve Time (s),
-- \# Explored Subproblems (The number of explored subproblems by the branch and bound algorithm
+- \# Explored Subproblems (The number of explored subproblems by the branch and bound algorithm)
 
 The CGLSP.py script contains the CGLSP solver class which solves an instance based on being provided a cost matrix for that instance. It works with any correctly structured cost matrix, but the command line interface specifically passes the instances for either cgl_17 or br17. 
 
