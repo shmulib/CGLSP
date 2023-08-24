@@ -101,7 +101,7 @@ python CGLSP.py <problem_type> <update_frequency>
 
 ```
 
-# Arguments 
+Arguments: 
 
 - 'problem_type': One of either 'CGLSP' or 'TSPLIB'. Selecting 'CGLSP' will run the solver for the
 cgl_17 problem instance. Selecting 'TSPLIB' will run the solver for the TSPLIB ATSP br17 instance.
@@ -144,15 +144,6 @@ Problems encountered - GCGLPS_26 can't find tight enough LBs
 ## Ideas for optimization algorithm improvement
 
 Work still to be done
-
-
-
-
-
-
-
-
-
 
 
 
