@@ -20,7 +20,6 @@ Documentation to include:
 - [Installation](#installation)
 - [Usage](#usage)
 - [Features](#features)
-- [Contributing](#contributing)
 - [License](#license)
 
 ## Installation
@@ -32,3 +31,16 @@ Example:
 git clone https://github.com/yourusername/yourproject.git
 cd yourproject
 pip install -r requirements.txt
+
+
+## Usage
+
+Explain how to use
+
+## Features
+
+Wondeful features
+
+## License
+
+
