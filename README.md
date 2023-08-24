@@ -46,10 +46,11 @@ compatible requirements.txt file in the dependencies directory, but an attempt t
 
 To clone the repo and setup the required conda virtual enviroment execut the following commands:
 
-'''
+```
 git clone https://github.com/shmulib/CGLSP.git
 cd CGLSP
-conda env create -f dependencies\environment.yml'''
+conda env create -f dependencies\environment.yml
+```
 
 ## Problem Instances
 
@@ -123,16 +124,6 @@ Problems encountered - GCGLPS_26 can't find tight enough LBs
 ## Ideas for optimization algorithm improvement
 
 Work still to be done
-
-
-
-
-
-
-
-
-
-
 
 
 
