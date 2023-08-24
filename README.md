@@ -1,13 +1,148 @@
-# CGLSP (Continuous Galvanzing Line for Steel Coil Production)
+# CGLSP (Continuous Galvanizing Line Sequencing Problem)
+
+The CGLSP is a sequencing problem that arises in the final stage production of steel coils. Steel coils can be required
+to galvanised, i.e. coated with a zinc layer to protect them against air and mosture. The steel coils are coated in batches
+where the coils in each batch are welded end to end to produce one continous strip of steel. This strip is then processed
+through the galvanizing line with no downtime between the individual coils that compose the strip.
+
+The sequence of the individual coils in the strip determines how much wastage of steel occurs as a result of the galvansing
+line needing to be recalibrated between coils. When the line transitions from coating one coil to the next, wastage occurs
+because the transition period of the line results in the beginning of the next coil being treated at suboptimal parameters.
+This can produce a section of the coils which is inferior or unsaleable.
+
+However, because of the relative settings required for different pairs of coils, the transition periods can be shortened
+by sequencing the coils such that consecutive pairs of coils have less wastage.
+
+Addtionally, because of phsyical differences in the individual coils, such as steel grade, some coils cannot be sequenced consecutively after other coils.
+
+Moreover the order in which a pair of coils is consecutively sequenced can result in different amounts of wastage.
+
+The complete choice of consecutive pairs forms a sequence, and the goal here to select a sequence to minimise aggregate wastage.
+
+The solver implemented in this repo uses a graph theoretic formulation of the sequencing problem and finds the optimal sequence for a batch coils by using a branch and bound algorithm variant.
+
+Details of the graph theoretic formulation of the problem, and the branch and bound algorithm used to solve it, 
+can be found in the docs [here](docs/problem_description.md)
+
+
+
+## Table of Contents
+
+- [Installation](#installation)
+- [Problem Instances](#problem-instances)
+- [Usage](#usage)
+- [Problem Description and Solution Approach](#problem-description-and-solution-approach)
+- [Codebase Structure](#codebase-structure)
+- [Results obtained used this solver](#results-obtained-used-this-solver)
+- [Ideas for optimization algorithm improvement](#ideas-for-optimization-algorithm-improvement)
+
+
+
+## Installation
+
+You can clone the repo and setup the required python virtual environment using the below commands. I use conda to manage virtual environemnts and have provided
+an environment.yml file to create a conda virtual environment with the required dependencies. I also created a pip
+compatible requirements.txt file in the dependencies directory, but an attempt to create a virtualenv virtual environment using pip failed due to pip being unable to find all required packages.
+
+To clone the repo and setup the required conda virtual enviroment execute the following commands:
+
+```
+git clone https://github.com/shmulib/CGLSP.git
+cd CGLSP
+conda env create -f dependencies\environment.yml
+```
+
+## Problem Instances
+
+This CGLSP sequencing problem comes from research Spanish academics conducted for a Spanish steel manufacturing company.
+
+I've provided the paper they wrote about their research on the CGLSP problem in the CGLSP_academic research directory of this repo. The paper is the file - Sequencing jobs with asymmetric costs and transition constraints.pdf
+
+The authors also provide 30 real problem instances derived from actual batches of steel coils required to be sequenced at the steel manufacturer.
+
+These 30 instances are provided in this repo in the problem_instances/CGLSP_instances/data directory.
+
+Each problem instance file is labelled cgl_{num_coils}.txt where the num_coils is the number of steel coils required
+to be galvanised in that batch.
+
+The contents of the problem instance files are cost matrices for the batch where entry (i,j) is the cost of sequencing
+coil j directly after coil i. All costs are non-negative except for pairs of coils that can't be sequence directly after
+each other, where the cost is -1 to indicate infeasibility.
+
+The smallest of the problem instances provided by the Spanish researches is cgl_17, containing 17 coils to be sequenced.
+Using this solver I have solved cgl_17 to optimality. I'm yet to be able to solve the other instances to optimality (the solver doesn't terminate), but I have several ideas for improving the branch and bound algorithm that should allow larger instances to be solved at all, and smaller instances to be solved faster.
+
+Further details of the problem instances are provided in the problem_instances/CGLSP_instaces/README.md file which was
+provided by the Spanish academics who shared the instances publicly.
+
+You can also read about the problem instances in this paper written by the same academics, which is 
+provided in this repo in CGLSP_academic_research/Problem_instances_dataset_of_a_real-world_sequencing_problem.pdf 
+
+I have also provided another problem instance of the same graph theoretic optimization problem, i.e. Asymmetric Travelling
+Salesman Problem. This instance is br17 from the ASTP problem instances in the TSPLIB95 database. The instance is located
+in problem_instances/TSPLIB_instances/br17.atsp
+
+The TSPLIB95 database contains problem instances of a variety of different TSP problem variants including ATSP as well as optimal solutions for the instances where they are known.
+
+The br17 instance has been provably solved to optimality. I have used this solver to solve the br17 instance to optimality as a means verifying correctness.
+
+## Usage
+
+The entry point to the solver is script CGLSP.py in the root directory.
+
+I've implemented a command line interface to run the solver using this script, for selected problem instances that I have successfully solved to optimality, i.e. cgl_17 and br17.
+
+You can use the command line interface as follows to run the solver for these instances:
+
+Ensure the current working directory is the root directory (CGLSP), then execute
+
+```
+python CGLSP.py <problem_type> <update_frequency>
+
+```
+Arguments: 
+
+- 'problem_type': One of either 'CGLSP' or 'TSPLIB'. Selecting 'CGLSP' will run the solver for the
+cgl_17 problem instance. Selecting 'TSPLIB' will run the solver for the TSPLIB ATSP br17 instance.
+- 'update_frequency' (optional): This is an integer that controls the frequency of solver progress updates output to the console during the solve. Specifically, it is the number or branching operations between solver updates. The default value is 500, but this can be tuned to a more suitable value for a given problem instance by prematurely terminating the solver and trying again with a more desirable update frequency.
+
+This command will run the solver for these specific instances of the chosen instance type. During the solve the solver will provide progress updates to the console at a frequency determined by the update_frequency argument. Once the instance has been solved to optimality final results will be logged and stored in the results directory in csv files labelled 'CGLSP_17' for the CGLSP instance and 'TSPLIB_ATSP_br17' for the TSPLIB instance.
+
+This csv results file contains the following fields:
+
+- Problem Instance,
+- \# Coils to sequence,
+- -Min (Optimal) Cost,
+- Optimal Sequence,
+- Solve Time (s),
+- \# Explored Subproblems (The number of explored subproblems by the branch and bound algorithm
+
+The CGLSP.py script contains the CGLSP solver class which solves an instance based on being provided a cost matrix for that instance. It works with any correctly structured cost matrix, but the command line interface specifically passes the instances for either cgl_17 or br17. 
+
+I have written an instance parser (get_CGLSP_instance_cost_matrix method of the CGLSP class) to convert the raw CGLSP problem instances provided by the Spanish academic researchers into cost matrices that can be used by the CGLSP solver.
+
+By using the CGLSP.py script directly any of the CGLSP problem instances can be passed to the solver, but I haven't implemented the command line interface to provide this functionality yet, as the other instances cannot yet be solved
+to optimality and my intention with the current command line interface was for it to be as clean/readable as possible.
+
+I plan to update the command line interface to allow any instance to be selected, once I have implemented the solver improvements dicussed in the "Ideas for optimization algorithm improvement" section below.
+
+## Problem Description and Solution Approach
+
 
 Problem Description in context
 Graph theory formulation
 Mathematical description of solution
-Description of how the algorithm is implemented in code - structure of code base ..
-How to setup env to run code
-How to run the solver for instances ->  navigate to root CGLSP dir and then run CGLSP.py with problem type arg
-Where the results are stored
-Work still to be done
+Description of how the algorithm is implemented in code -
+
+
+
+## Codebase Structure
+
+ structure of code base ..
+
+## Results obtained used this solver
+
+
 
 Results so far
 Problems encountered - GCGLPS_26 can't find tight enough LBs
@@ -15,20 +150,24 @@ Problems encountered - GCGLPS_26 can't find tight enough LBs
                     - even though optimal solution is found, because branching results in subproblems with very low LB, not feasible sols to CGLSP, only to the relaxation
 
 
-## Table of Contents
+## Ideas for optimization algorithm improvement
 
-- [Installation](#installation)
-- [Usage](#usage)
-- [Features](#features)
-- [Contributing](#contributing)
-- [License](#license)
+Work still to be done
 
-## Installation
 
-Provide instructions for how to install your project. Include any prerequisites and steps needed to get your project up and running.
 
-Example:
-```bash
-git clone https://github.com/yourusername/yourproject.git
-cd yourproject
-pip install -r requirements.txt
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
