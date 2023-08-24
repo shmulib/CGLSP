@@ -1,9 +1,13 @@
-from pathlib import Path
-import time
+
 from bnb_tree import BnB_Tree
 import sys
+import time
+from pathlib import Path
 import numpy as np
-np.set_printoptions(precision=2, suppress=True, linewidth=100)  # Adjust linewidth as needed
+
+# ensure cost matrices are printed to the console nicely by increasing the line
+# width for printing numpy arrays
+np.set_printoptions(precision=2, suppress=True, linewidth=100)
 
 
 class CGLSP:
@@ -80,7 +84,7 @@ class CGLSP:
             self.optimal_sequence.remove(0)
 
         # min cost of -1 is returned when there are no feasible solutions to CGLSP
-        # (Although for the Spansh CGLSP data from ...
+        # (Although for the Spansh CGLSP problem instances
         # the authors gaurantee that all instances have a solution)
 
         # In general though, a CGLSP instance may not have feasible solutions
@@ -118,7 +122,7 @@ class CGLSP:
                   "Solve Time (s)": round(self.solve_time, 4),
                   "# Explored Subproblems": self.bnb_tree.explored_subproblems}
 
-        # Write the single result to the CSV file
+        # Write the result to the CSV file
         with csv_file_path.open(mode="w", newline="") as csv_file:
             fieldnames = [field for field in result]
             writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
@@ -176,9 +180,6 @@ if __name__ == "__main__":
             update_frequency = int(sys.argv[2])
 
         if problem_type == "CGLSP":
-
-            # cgl_17 Solved
-            # cgl_26 - Can't terminate in reasonable time
 
             problem_instance_relative_path = \
                 "problem_instances/CGLSP_instances/data/cgl_17.txt"
