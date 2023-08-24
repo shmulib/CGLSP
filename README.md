@@ -29,9 +29,9 @@ can be found in the docs here - INSERT INTERNAL LINK
 ## Table of Contents
 
 - [Installation](#installation)
+- [Problem Instances](#problem-instances)
 - [Usage](#usage)
 - [Problem Description and Solution Approach](#problem-description-and-solution-approach)
-- [Problem Instances](#problem-instances)
 - [Codebase Structure](#codebase-structure)
 - [Results obtained used this solver](#results-obtained-used-this-solver)
 - [Ideas for optimization algorithm improvement](#ideas-for-optimization-algorithm-improvement)
@@ -40,16 +40,16 @@ can be found in the docs here - INSERT INTERNAL LINK
 
 ## Installation
 
-How to setup env to run code
+Git clone the repo to gain access to the code. I useconda to manage virtual environemnts and have provided
+an environment.yml file to create a conda virtual environment with the required dependencies. I also created a pip
+compatible requirements.txt file in the dependencies directory, but an attempt to create a virtualenv virtual environment using pip failed due to pip being unable to find all required packages.
 
-Provide instructions for how to install your project. Include any prerequisites and steps needed to get your project up and running.
+To clone the repo and setup the required conda virtual enviroment execute the following commands:
 
-Example:
-
-'''bash
-git clone https://github.com/yourusername/yourproject.git
-cd yourproject
-pip install -r requirements.txt'''
+'''
+git clone https://github.com/shmulib/CGLSP.git
+cd CGLSP
+conda env create -f dependencies\environment.yml'''
 
 ## Usage
 
