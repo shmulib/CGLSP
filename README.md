@@ -39,7 +39,7 @@ Details of the graph theoretic formulation of the problem, and the branch and bo
 
 ## Installation
 
-You can clone the repo and setup the required python virtual environment using the below commands. I use conda to manage virtual environemnts and have provided
+To clone the repo and set up the required python virtual environment use the below commands. I use conda to manage virtual environemnts and have provided
 an environment.yml file to create a conda virtual environment with the required dependencies. I also created a pip
 compatible requirements.txt file in the dependencies directory, but an attempt to create a virtualenv virtual environment using pip failed due to pip being unable to find all required packages.
 
@@ -53,7 +53,7 @@ conda env create -f dependencies\environment.yml
 
 ## Problem Instances
 
-This CGLSP sequencing problem comes from research Spanish academics conducted for a Spanish steel manufacturing company.
+This CGLSP sequencing problem orginates from research Spanish academics conducted for a Spanish steel manufacturing company.
 
 I've provided the paper they wrote about their research on the CGLSP problem in the CGLSP_academic research directory of this repo. The paper is the file - Sequencing jobs with asymmetric costs and transition constraints.pdf
 
@@ -68,11 +68,8 @@ The contents of the problem instance files are cost matrices for the batch where
 coil j directly after coil i. All costs are non-negative except for pairs of coils that can't be sequence directly after
 each other, where the cost is -1 to indicate infeasibility.
 
-The smallest of the problem instances provided by the Spanish researches is cgl_17, containing 17 coils to be sequenced.
-Using this solver I have solved cgl_17 to optimality. I'm yet to be able to solve the other instances to optimality (the solver doesn't terminate), but I have several ideas for improving the branch and bound algorithm that should allow larger instances to be solved at all, and smaller instances to be solved faster.
-
 Further details of the problem instances are provided in the problem_instances/CGLSP_instaces/README.md file which was
-provided by the Spanish academics who shared the instances publicly.
+provided by the Spanish academics who [shared the instances publicly](https://data.mendeley.com/datasets/v357z2ncbh/2).
 
 You can also read about the problem instances in this paper written by the same academics, which is 
 provided in this repo in CGLSP_academic_research/Problem_instances_dataset_of_a_real-world_sequencing_problem.pdf 
@@ -81,13 +78,13 @@ I have also provided another problem instance of the same graph theoretic optimi
 Salesman Problem. This instance is br17 from the ASTP problem instances in the TSPLIB95 database. The instance is located
 in problem_instances/TSPLIB_instances/br17.atsp
 
-The TSPLIB95 database contains problem instances of a variety of different TSP problem variants including ATSP as well as optimal solutions for the instances where they are known.
+The [TSPLIB95](http://comopt.ifi.uni-heidelberg.de/software/TSPLIB95/) database contains problem instances of a variety of different TSP problem variants including ATSP as well as optimal solutions for the instances where they are known.
 
 The br17 instance has been provably solved to optimality. I have used this solver to solve the br17 instance to optimality as a means verifying correctness.
 
 ## Usage
 
-The entry point to the solver is script CGLSP.py in the root directory.
+The entry point to the solver is the CGLSP.py script in the src directory.
 
 I've implemented a command line interface to run the solver using this script, for selected problem instances that I have successfully solved to optimality, i.e. cgl_17 and br17.
 
@@ -96,7 +93,7 @@ You can use the command line interface as follows to run the solver for these in
 Ensure the current working directory is the root directory (CGLSP), then execute
 
 ```
-python CGLSP.py <problem_type> <update_frequency>
+python -m src.CGLSP <problem_type> <update_frequency>
 
 ```
 Arguments: 
@@ -118,25 +115,24 @@ This csv results file contains the following fields:
 
 The CGLSP.py script contains the CGLSP solver class which solves an instance based on being provided a cost matrix for that instance. It works with any correctly structured cost matrix, but the command line interface specifically passes the instances for either cgl_17 or br17. 
 
-I have written an instance parser (get_CGLSP_instance_cost_matrix method of the CGLSP class) to convert the raw CGLSP problem instances provided by the Spanish academic researchers into cost matrices that can be used by the CGLSP solver.
+I have written an instance parser (in src/instance_parser.py) to convert the raw CGLSP problem instances provided by the Spanish academic researchers into cost matrices that can be used by the CGLSP solver.
 
 By using the CGLSP.py script directly any of the CGLSP problem instances can be passed to the solver, but I haven't implemented the command line interface to provide this functionality yet, as the other instances cannot yet be solved
 to optimality and my intention with the current command line interface was for it to be as clean/readable as possible.
 
-I plan to update the command line interface to allow any instance to be selected, once I have implemented the solver improvements dicussed in the "Ideas for optimization algorithm improvement" section below.
+I plan to update the command line interface to allow any instance to be selected, once I have implemented the solver improvements dicussed in the ["Ideas for optimization algorithm improvement"](#ideas-for-optimization-algorithm-improvement) section below.
 
 ## Graph Theory Formulation and Branch and Bound Solution
 
-The CGLSP sequencing problem can be formulated as a graph theory optimization problem of finding
-a minimum cost Hamiltonian path on an incomplete asymmetric graph, or digraph.
+The CGLSP sequencing problem can be formulated as a graph theory optimization problem of finding a minimum cost Hamiltonian path on an incomplete asymmetric graph, or digraph.
 
 The details of this graph theoretic formulation and the description of the branch and bound algorithm
-this solver uses to solve it, can be found in the docs [here](docs/CGLSP_graph_formulation_and_branch_and_bound_solution.md)
+this solver uses to solve it, will shortly be able to be found in the docs [here](docs/CGLSP_graph_formulation_and_branch_and_bound_solution.md)
 
 
 ## Codebase Structure
 
-This repo implements a solver for the CGLSP sequencing problem. The structure of the codebase is described in the docs [here](docs/codebase_structure.md)
+This repo implements a solver for the CGLSP sequencing problem. The structure of the codebase will shortly be described in the docs [here](docs/codebase_structure.md)
 
 ## Results obtained used this solver
 
@@ -148,20 +144,40 @@ Utilizing the current implementation, without the addtional optimization improve
     - The current solver, solves cgl_17 to optimality in about 0.30s, demonstrating that it can potentially solve instances very quickly.
 - The TSPLIB (ASTP) instance  \- br17
     - This is not an CGLSP instance, but the graph theory formulation is the same as a CGLSP instance
-    - The solver finds the known optimal solution, which is both, proof of correctness, as well as evidence of the solver's ability to solve instances
+    - The solver finds the known optimal solution, which is both, a proof of correctness, as well as evidence of the solver's ability to solve instances
       of this size for the CGLSP.
     - As the optimal cost for the br17 instance is known, we have determined that the optimal solution is found early on in the branch and bound algorithm, but the lower bounds determined for subproblems remain lower than the optimal solution for a relatively large number of subproblems that are branched to. Improvements in choice of branching variables and order of subproblems considered, explained in the possible solver improvements [section](#ideas-for-optimization-algorithm-improvement), may help reduce the size to which the branch and bound tree grows for this instance.
 
 Instances attempted to be solved by the solver, but that don't currently terminate:
 
 - The next largest CGLSP instance with 26 coils - CGLSP_26
-    - The solver hasn't terminated when run for about 20 minutes, beacuse the branch and bound tree continues to grow. This occurs because the upper bounds obtained through finding optimal solutions of the Modified Assignment Problem (CGLSP relxation) for the subproblems which are CGLSP feasible, are not lower than a large number of the lower bounds obtained for explored subproblems, and so these subproblems are branched on instead of pruned, resulting in a very inefficient branch and bound search. 
+    - The solver hasn't terminated when run for about 20 minutes, beacuse the branch and bound tree continues to grow. This occurs because the upper bounds obtained through finding optimal solutions of the Modified Assignment Problem (CGLSP relxation) for the subproblems, which are CGLSP feasible, are not lower than a large number of the lower bounds obtained for explored subproblems, and so these subproblems are branched on instead of pruned, resulting in a very inefficient branch and bound search. 
     - The improvements suggested [below](#ideas-for-optimization-algorithm-improvement) may bring this and other larger CGSLP instances into reach of the solver.
 
 
 ## Ideas for optimization algorithm improvement
 
 Work still to be done
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
