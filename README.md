@@ -8,7 +8,7 @@ through the galvanizing line with no downtime between the individual coils that 
 The sequence of the individual coils in the strip determines how much wastage of steel occurs as a result of the galvansing
 line needing to be recalibrated between coils. When the line transitions from coating one coil to the next, wastage occurs
 because the transition period of the line results in the beginning of the next coil being treated at suboptimal parameters.
-This can produce a section of the coils which is inferiror or unsaleable.
+This can produce a section of the coils which is inferior or unsaleable.
 
 However, because of the relative settings required for different pairs of coils, the transition periods can be shortened
 by sequencing the coils such that consecutive pairs of coils have less wastage.
@@ -40,11 +40,11 @@ can be found in the docs here - INSERT INTERNAL LINK
 
 ## Installation
 
-Git clone the repo to gain access to the code. I use the conda to manage virtual environemnts and have provided
+You can clone the repo and setup the required python virtual environment using the below commands. I use conda to manage virtual environemnts and have provided
 an environment.yml file to create a conda virtual environment with the required dependencies. I also created a pip
 compatible requirements.txt file in the dependencies directory, but an attempt to create a virtualenv virtual environment using pip failed due to pip being unable to find all required packages.
 
-To clone the repo and setup the required conda virtual enviroment execut the following commands:
+To clone the repo and setup the required conda virtual enviroment execute the following commands:
 
 ```
 git clone https://github.com/shmulib/CGLSP.git
@@ -54,7 +54,7 @@ conda env create -f dependencies\environment.yml
 
 ## Problem Instances
 
-This CGLSP sequencing problem comes from research Spanish academics conducted to aid a Spanish steel manufacturing company.
+This CGLSP sequencing problem comes from research Spanish academics conducted for a Spanish steel manufacturing company.
 
 I've provided the paper they wrote about their research on the CGLSP problem in the CGLSP_academic research directory of this repo. The paper is the file - Sequencing jobs with asymmetric costs and transition constraints.pdf
 
@@ -82,7 +82,7 @@ I have also provided another problem instance of the same graph theoretic optimi
 Salesman Problem. This instance is br17 from the ASTP problem instances in the TSPLIB95 database. The instance is located
 in problem_instances/TSPLIB_instances/br17.atsp
 
-The TSPLIB95 database contains problem instances of a variety of different TSP problem variants including ATSP as well as optimalsolutions for the instances where they are known.
+The TSPLIB95 database contains problem instances of a variety of different TSP problem variants including ATSP as well as optimal solutions for the instances where they are known.
 
 The br17 instance has been provably solved to optimality. I have used this solver to solve the br17 instance to optimality as a means verifying correctness.
 
@@ -104,17 +104,27 @@ Arguments:
 
 - 'problem_type': One of either 'CGLSP' or 'TSPLIB'. Selecting 'CGLSP' will run the solver for the
 cgl_17 problem instance. Selecting 'TSPLIB' will run the solver for the TSPLIB ATSP br17 instance.
-- 'update_frequency' (optional): This is an integer that control the frequency of solver progress updates output to the console during the solve. Specifically, it is the number or branching operations between solver updates. The default value is 500, but this can be tuned to a more suitable value by prematurely terminating the solver and trying again with a more desirable update frequency.
+- 'update_frequency' (optional): This is an integer that controls the frequency of solver progress updates output to the console during the solve. Specifically, it is the number or branching operations between solver updates. The default value is 500, but this can be tuned to a more suitable value for a given problem instance by prematurely terminating the solver and trying again with a more desirable update frequency.
 
-The CGLSP.py contains the CGLSP solver class which solves an instance based on being provided a cost matrix for that instance. It works with any correctly structured cost matrix, but the command line interface specifically passes the instances for either cgl_17 or br17. 
+This command will run the solver for these specific instances of the chosen instance type. During the solve the solver will provide progress updates to the console at a frequency determined by the update_frequency argument. Once the instance has been solved to optimality final results will be logged and stored in the results directory in csv files labelled 'CGLSP_17' for the CGLSP instance and 'TSPLIB_ATSP_br17' for the TSPLIB instance.
+
+This csv results file contains the following fields:
+
+- Problem Instance,
+- \# Coils to sequence,
+- -Min (Optimal) Cost,
+- Optimal Sequence,
+- Solve Time (s),
+- \# Explored Subproblems (The number of explored subproblems by the branch and bound algorithm
+
+The CGLSP.py script contains the CGLSP solver class which solves an instance based on being provided a cost matrix for that instance. It works with any correctly structured cost matrix, but the command line interface specifically passes the instances for either cgl_17 or br17. 
 
 I have written an instance parser (get_CGLSP_instance_cost_matrix method of the CGLSP class) to convert the raw CGLSP problem instances provided by the Spanish academic researchers into cost matrices that can be used by the CGLSP solver.
 
-By using the CGLSP.py script directly any of the CGLSP problem instances can be passed to the solver, but I haven't implemented the command line interface to provide this functionality yet as the other instances cannot yet be solved
+By using the CGLSP.py script directly any of the CGLSP problem instances can be passed to the solver, but I haven't implemented the command line interface to provide this functionality yet, as the other instances cannot yet be solved
 to optimality and my intention with the current command line interface was for it to be as clean/readable as possible.
 
-I plan to update the command line interface to allow any instance to be selected once I have implemented the solver improvements dicussed in the "Ideas for optimization algorithm improvement" section below.
-
+I plan to update the command line interface to allow any instance to be selected, once I have implemented the solver improvements dicussed in the "Ideas for optimization algorithm improvement" section below.
 
 ## Problem Description and Solution Approach
 
