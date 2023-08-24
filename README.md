@@ -84,7 +84,7 @@ The br17 instance has been provably solved to optimality. I have used this solve
 
 ## Usage
 
-The entry point to the solver is script CGLSP.py in the root directory.
+The entry point to the solver is the CGLSP.py script in the src directory.
 
 I've implemented a command line interface to run the solver using this script, for selected problem instances that I have successfully solved to optimality, i.e. cgl_17 and br17.
 
@@ -93,7 +93,7 @@ You can use the command line interface as follows to run the solver for these in
 Ensure the current working directory is the root directory (CGLSP), then execute
 
 ```
-python CGLSP.py <problem_type> <update_frequency>
+python -m src.CGLSP <problem_type> <update_frequency>
 
 ```
 Arguments: 
@@ -159,6 +159,11 @@ Instances attempted to be solved by the solver, but that don't currently termina
 ## Ideas for optimization algorithm improvement
 
 Work still to be done
+
+
+
+
+
 
 
 
