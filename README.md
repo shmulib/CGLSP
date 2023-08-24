@@ -115,17 +115,16 @@ This csv results file contains the following fields:
 
 The CGLSP.py script contains the CGLSP solver class which solves an instance based on being provided a cost matrix for that instance. It works with any correctly structured cost matrix, but the command line interface specifically passes the instances for either cgl_17 or br17. 
 
-I have written an instance parser (get_CGLSP_instance_cost_matrix method of the CGLSP class) to convert the raw CGLSP problem instances provided by the Spanish academic researchers into cost matrices that can be used by the CGLSP solver.
+I have written an instance parser (in src/instance_parser.py) to convert the raw CGLSP problem instances provided by the Spanish academic researchers into cost matrices that can be used by the CGLSP solver.
 
 By using the CGLSP.py script directly any of the CGLSP problem instances can be passed to the solver, but I haven't implemented the command line interface to provide this functionality yet, as the other instances cannot yet be solved
 to optimality and my intention with the current command line interface was for it to be as clean/readable as possible.
 
-I plan to update the command line interface to allow any instance to be selected, once I have implemented the solver improvements dicussed in the "Ideas for optimization algorithm improvement" section below.
+I plan to update the command line interface to allow any instance to be selected, once I have implemented the solver improvements dicussed in the ["Ideas for optimization algorithm improvement"](#ideas-for-optimization-algorithm-improvement) section below.
 
 ## Graph Theory Formulation and Branch and Bound Solution
 
-The CGLSP sequencing problem can be formulated as a graph theory optimization problem of finding
-a minimum cost Hamiltonian path on an incomplete asymmetric graph, or digraph.
+The CGLSP sequencing problem can be formulated as a graph theory optimization problem of finding a minimum cost Hamiltonian path on an incomplete asymmetric graph, or digraph.
 
 The details of this graph theoretic formulation and the description of the branch and bound algorithm
 this solver uses to solve it, can be found in the docs [here](docs/CGLSP_graph_formulation_and_branch_and_bound_solution.md)
@@ -145,20 +144,30 @@ Utilizing the current implementation, without the addtional optimization improve
     - The current solver, solves cgl_17 to optimality in about 0.30s, demonstrating that it can potentially solve instances very quickly.
 - The TSPLIB (ASTP) instance  \- br17
     - This is not an CGLSP instance, but the graph theory formulation is the same as a CGLSP instance
-    - The solver finds the known optimal solution, which is both, proof of correctness, as well as evidence of the solver's ability to solve instances
+    - The solver finds the known optimal solution, which is both, a proof of correctness, as well as evidence of the solver's ability to solve instances
       of this size for the CGLSP.
     - As the optimal cost for the br17 instance is known, we have determined that the optimal solution is found early on in the branch and bound algorithm, but the lower bounds determined for subproblems remain lower than the optimal solution for a relatively large number of subproblems that are branched to. Improvements in choice of branching variables and order of subproblems considered, explained in the possible solver improvements [section](#ideas-for-optimization-algorithm-improvement), may help reduce the size to which the branch and bound tree grows for this instance.
 
 Instances attempted to be solved by the solver, but that don't currently terminate:
 
 - The next largest CGLSP instance with 26 coils - CGLSP_26
-    - The solver hasn't terminated when run for about 20 minutes, beacuse the branch and bound tree continues to grow. This occurs because the upper bounds obtained through finding optimal solutions of the Modified Assignment Problem (CGLSP relxation) for the subproblems which are CGLSP feasible, are not lower than a large number of the lower bounds obtained for explored subproblems, and so these subproblems are branched on instead of pruned, resulting in a very inefficient branch and bound search. 
+    - The solver hasn't terminated when run for about 20 minutes, beacuse the branch and bound tree continues to grow. This occurs because the upper bounds obtained through finding optimal solutions of the Modified Assignment Problem (CGLSP relxation) for the subproblems, which are CGLSP feasible, are not lower than a large number of the lower bounds obtained for explored subproblems, and so these subproblems are branched on instead of pruned, resulting in a very inefficient branch and bound search. 
     - The improvements suggested [below](#ideas-for-optimization-algorithm-improvement) may bring this and other larger CGSLP instances into reach of the solver.
 
 
 ## Ideas for optimization algorithm improvement
 
 Work still to be done
+
+
+
+
+
+
+
+
+
+
 
 
 
