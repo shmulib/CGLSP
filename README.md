@@ -46,11 +46,10 @@ compatible requirements.txt file in the dependencies directory, but an attempt t
 
 To clone the repo and setup the required conda virtual enviroment execut the following commands:
 
-```
+'''
 git clone https://github.com/shmulib/CGLSP.git
 cd CGLSP
-conda env create -f dependencies\environment.yml
-```
+conda env create -f dependencies\environment.yml'''
 
 ## Problem Instances
 
@@ -69,19 +68,33 @@ The contents of the problem instance files are cost matrices for the batch where
 coil j directly after coil i. All costs are non-negative except for pairs of coils that can't be sequence directly after
 each other, where the cost is -1 to indicate infeasibility.
 
+The smallest of the problem instances provided by the Spanish researches is cgl_17, containing 17 coils to be sequenced.
+Using this solver I have solved cgl_17 to optimality. I'm yet to be able to solve the other instances to optimality (the solver doesn't terminate), but I have several ideas for improving the branch and bound algorithm that should allow larger instances to be solved at all, and smaller instances to be solved faster.
+
 Further details of the problem instances are provided in the problem_instances/CGLSP_instaces/README.md file which was
 provided by the Spanish academics who shared the instances publicly.
 
-You can also read about the problem instances in the paper written about the problem instances by these academics which is 
+You can also read about the problem instances in this paper written by the same academics, which is 
 provided in this repo in CGLSP_academic_research/Problem_instances_dataset_of_a_real-world_sequencing_problem.pdf 
 
+I have also provided another problem instance of the same graph theoretic optimization problem, i.e. Asymmetric Travelling
+Salesman Problem. This instance is br17 from the ASTP problem instances in the TSPLIB95 database. The instance is located
+in problem_instances/TSPLIB_instances/br17.atsp
+
+The TSPLIB95 database contains problem instances of a variety of different TSP problem variants including ATSP as well as optimalsolutions for the instances where they are known.
+
+The br17 instance has been provably solved to optimality. I have used this solver to solve the br17 instance to optimality as a means verifying correctness.
 
 ## Usage
 
-How to run the solver for instances ->  navigate to root CGLSP dir and then run CGLSP.py with problem type arg
+The entry point to the solver is script CGLSP.py in the root directory.
+
+I've implemented a command line interface to run the solver using this script, for selected problem instances that I have successfully solved to optimality, i.e. cgl_17 and br17.
+
+You can use the command line interface as follows to run the solver for these instances:
 
 
-Where the results are stored
+
 
 ## Problem Description and Solution Approach
 
@@ -100,6 +113,7 @@ Description of how the algorithm is implemented in code -
 ## Results obtained used this solver
 
 
+
 Results so far
 Problems encountered - GCGLPS_26 can't find tight enough LBs
                     - TSPLIP br17 is solved exactly, but tree grows relatively large
@@ -109,6 +123,8 @@ Problems encountered - GCGLPS_26 can't find tight enough LBs
 ## Ideas for optimization algorithm improvement
 
 Work still to be done
+
+
 
 
 
