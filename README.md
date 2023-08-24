@@ -136,11 +136,9 @@ this solver uses to solve it, can be found in the docs [here](docs/CGLSP_graph_f
 
 ## Codebase Structure
 
- structure of code base ..
+TThis repo implements a solver for the CGLSP sequencing problem. The structure of the codebase is described in the docs [here](docs/codebase_structure.md)
 
 ## Results obtained used this solver
-
-
 
 Results so far
 Problems encountered - GCGLPS_26 can't find tight enough LBs
