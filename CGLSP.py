@@ -199,4 +199,4 @@ if __name__ == "__main__":
 
         else:
             raise InvalidArgumentsError("Pass only the type of problem instance you'd "
-                                        "like to solve. ChooseEither 'TSPLIB' or 'CGLSP'")
+                                        "like to solve. Choose either 'TSPLIB' or 'CGLSP'")
