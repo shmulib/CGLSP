@@ -44,7 +44,7 @@ Git clone the repo to gain access to the code. I useconda to manage virtual envi
 an environment.yml file to create a conda virtual environment with the required dependencies. I also created a pip
 compatible requirements.txt file in the dependencies directory, but an attempt to create a virtualenv virtual environment using pip failed due to pip being unable to find all required packages.
 
-To clone the repo and setup the required conda virtual enviroment execute the following commands:
+To clone the repo and setup the required conda virtual enviroment execute the following commands (note the \ for Windows):
 
 ```
 git clone https://github.com/shmulib/CGLSP.git
