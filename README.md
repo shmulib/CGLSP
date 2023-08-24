@@ -127,12 +127,12 @@ I plan to update the command line interface to allow any instance to be selected
 The CGLSP sequencing problem can be formulated as a graph theory optimization problem of finding a minimum cost Hamiltonian path on an incomplete asymmetric graph, or digraph.
 
 The details of this graph theoretic formulation and the description of the branch and bound algorithm
-this solver uses to solve it, can be found in the docs [here](docs/CGLSP_graph_formulation_and_branch_and_bound_solution.md)
+this solver uses to solve it, will shortly be able to be found in the docs [here](docs/CGLSP_graph_formulation_and_branch_and_bound_solution.md)
 
 
 ## Codebase Structure
 
-This repo implements a solver for the CGLSP sequencing problem. The structure of the codebase is described in the docs [here](docs/codebase_structure.md)
+This repo implements a solver for the CGLSP sequencing problem. The structure of the codebase will shortly be described in the docs [here](docs/codebase_structure.md)
 
 ## Results obtained used this solver
 
