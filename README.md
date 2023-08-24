@@ -39,7 +39,7 @@ Details of the graph theoretic formulation of the problem, and the branch and bo
 
 ## Installation
 
-You can clone the repo and setup the required python virtual environment using the below commands. I use conda to manage virtual environemnts and have provided
+To clone the repo and set up the required python virtual environment use the below commands. I use conda to manage virtual environemnts and have provided
 an environment.yml file to create a conda virtual environment with the required dependencies. I also created a pip
 compatible requirements.txt file in the dependencies directory, but an attempt to create a virtualenv virtual environment using pip failed due to pip being unable to find all required packages.
 
@@ -68,9 +68,6 @@ The contents of the problem instance files are cost matrices for the batch where
 coil j directly after coil i. All costs are non-negative except for pairs of coils that can't be sequence directly after
 each other, where the cost is -1 to indicate infeasibility.
 
-The smallest of the problem instances provided by the Spanish researches is cgl_17, containing 17 coils to be sequenced.
-Using this solver I have solved cgl_17 to optimality. I'm yet to be able to solve the other instances to optimality (the solver doesn't terminate), but I have several ideas for improving the branch and bound algorithm that should allow larger instances to be solved at all, and smaller instances to be solved faster.
-
 Further details of the problem instances are provided in the problem_instances/CGLSP_instaces/README.md file which was
 provided by the Spanish academics who shared the instances publicly.
 
@@ -81,7 +78,7 @@ I have also provided another problem instance of the same graph theoretic optimi
 Salesman Problem. This instance is br17 from the ASTP problem instances in the TSPLIB95 database. The instance is located
 in problem_instances/TSPLIB_instances/br17.atsp
 
-The TSPLIB95 database contains problem instances of a variety of different TSP problem variants including ATSP as well as optimal solutions for the instances where they are known.
+The [TSPLIB95](http://comopt.ifi.uni-heidelberg.de/software/TSPLIB95/) database contains problem instances of a variety of different TSP problem variants including ATSP as well as optimal solutions for the instances where they are known.
 
 The br17 instance has been provably solved to optimality. I have used this solver to solve the br17 instance to optimality as a means verifying correctness.
 
@@ -162,6 +159,12 @@ Instances attempted to be solved by the solver, but that don't currently termina
 ## Ideas for optimization algorithm improvement
 
 Work still to be done
+
+
+
+
+
+
 
 
 
