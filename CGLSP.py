@@ -100,9 +100,6 @@ class CGLSP:
         subdirectory = "results"
         Path(subdirectory).mkdir(parents=True, exist_ok=True)
 
-        # Single result data (replace this with your actual data)
-        result = {"Name": "Alice", "Age": 25}
-
         if self.problem_type == "TSPLIB":
             file_name = "TSPLIB_ATSP_br17.csv"
             problem_instance = "br17"
