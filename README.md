@@ -53,7 +53,7 @@ conda env create -f dependencies\environment.yml
 
 ## Problem Instances
 
-This CGLSP sequencing problem comes from research Spanish academics conducted for a Spanish steel manufacturing company.
+This CGLSP sequencing problem orginates from research Spanish academics conducted for a Spanish steel manufacturing company.
 
 I've provided the paper they wrote about their research on the CGLSP problem in the CGLSP_academic research directory of this repo. The paper is the file - Sequencing jobs with asymmetric costs and transition constraints.pdf
 
@@ -69,7 +69,7 @@ coil j directly after coil i. All costs are non-negative except for pairs of coi
 each other, where the cost is -1 to indicate infeasibility.
 
 Further details of the problem instances are provided in the problem_instances/CGLSP_instaces/README.md file which was
-provided by the Spanish academics who shared the instances publicly.
+provided by the Spanish academics who [shared the instances publicly](https://data.mendeley.com/datasets/v357z2ncbh/2).
 
 You can also read about the problem instances in this paper written by the same academics, which is 
 provided in this repo in CGLSP_academic_research/Problem_instances_dataset_of_a_real-world_sequencing_problem.pdf 
@@ -159,6 +159,11 @@ Instances attempted to be solved by the solver, but that don't currently termina
 ## Ideas for optimization algorithm improvement
 
 Work still to be done
+
+
+
+
+
 
 
 
