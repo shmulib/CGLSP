@@ -94,7 +94,27 @@ I've implemented a command line interface to run the solver using this script, f
 
 You can use the command line interface as follows to run the solver for these instances:
 
+Ensure the current working directory is the root directory (CGLSP), then execute
 
+```
+python CGLSP.py <problem_type> <update_frequency>
+
+```
+
+# Arguments 
+
+- 'problem_type': One of either 'CGLSP' or 'TSPLIB'. Selecting 'CGLSP' will run the solver for the
+cgl_17 problem instance. Selecting 'TSPLIB' will run the solver for the TSPLIB ATSP br17 instance.
+- 'update_frequency' (optional): This is an integer that control the frequency of solver progress updates output to the console during the solve. Specifically, it is the number or branching operations between solver updates. The default value is 500, but this can be tuned to a more suitable value by prematurely terminating the solver and trying again with a more desirable update frequency.
+
+The CGLSP.py contains the CGLSP solver class which solves an instance based on being provided a cost matrix for that instance. It works with any correctly structured cost matrix, but the command line interface specifically passes the instances for either cgl_17 or br17. 
+
+I have written an instance parser (get_CGLSP_instance_cost_matrix method of the CGLSP class) to convert the raw CGLSP problem instances provided by the Spanish academic researchers into cost matrices that can be used by the CGLSP solver.
+
+By using the CGLSP.py script directly any of the CGLSP problem instances can be passed to the solver, but I haven't implemented the command line interface to provide this functionality yet as the other instances cannot yet be solved
+to optimality and my intention with the current command line interface was for it to be as clean/readable as possible.
+
+I plan to update the command line interface to allow any instance to be selected once I have implemented the solver improvements dicussed in the "Ideas for optimization algorithm improvement" section below.
 
 
 ## Problem Description and Solution Approach
@@ -124,6 +144,10 @@ Problems encountered - GCGLPS_26 can't find tight enough LBs
 ## Ideas for optimization algorithm improvement
 
 Work still to be done
+
+
+
+
 
 
 
