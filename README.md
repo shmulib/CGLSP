@@ -46,10 +46,11 @@ compatible requirements.txt file in the dependencies directory, but an attempt t
 
 To clone the repo and setup the required conda virtual enviroment execute the following commands:
 
-'''
+```
 git clone https://github.com/shmulib/CGLSP.git
 cd CGLSP
-conda env create -f dependencies\environment.yml'''
+conda env create -f dependencies\environment.yml
+```
 
 ## Usage
 
