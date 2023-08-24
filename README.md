@@ -21,7 +21,7 @@ The complete choice of consecutive pairs forms a sequence, and the goal here to 
 
 The solver implemented in this repo uses a graph theoretic formulation of the sequencing problem and finds the optimal sequence for a batch coils by using a branch and bound algorithm variant.
 
-Details of the graph theoretic formulation of the problem, and the branch and bound algorithm used to solve it, can be found in the docs [here](docs/problem_description.md)
+Details of the graph theoretic formulation of the problem, and the branch and bound algorithm used to solve it, can be found in the docs [here](docs/CGLSP_graph_formulation_and_branch_and_bound_solution.md)
 
 
 
@@ -30,7 +30,7 @@ Details of the graph theoretic formulation of the problem, and the branch and bo
 - [Installation](#installation)
 - [Problem Instances](#problem-instances)
 - [Usage](#usage)
-- [Problem Description and Solution Approach](#problem-description-and-solution-approach)
+- [Graph Theory Formulation and Branch and Bound Solution](#graph-theory-formulation-and-branch-and-bound-solution)
 - [Codebase Structure](#codebase-structure)
 - [Results obtained used this solver](#results-obtained-used-this-solver)
 - [Ideas for optimization algorithm improvement](#ideas-for-optimization-algorithm-improvement)
@@ -125,13 +125,13 @@ to optimality and my intention with the current command line interface was for i
 
 I plan to update the command line interface to allow any instance to be selected, once I have implemented the solver improvements dicussed in the "Ideas for optimization algorithm improvement" section below.
 
-## Problem Description and Solution Approach
+## Graph Theory Formulation and Branch and Bound Solution
 
 The CGLSP sequencing problem can be formulated as a graph theory optimization problem of finding
 a minimum cost Hamiltonian path on an incomplete asymmetric graph, or digraph.
 
 The details of this graph theoretic formulation and the description of the branch and bound algorithm
-this solver uses to solve it, can be found in the docs [here](docs/problem_description.md)
+this solver uses to solve it, can be found in the docs [here](docs/CGLSP_graph_formulation_and_branch_and_bound_solution.md)
 
 
 ## Codebase Structure
