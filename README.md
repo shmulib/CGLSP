@@ -22,7 +22,7 @@ The complete choice of consecutive pairs forms a sequence, and the goal here to 
 The solver implemented in this repo uses a graph theoretic formulation of the sequencing problem and finds the optimal sequence for a batch coils by using a branch and bound algorithm variant.
 
 Details of the graph theoretic formulation of the problem, and the branch and bound algorithm used to solve it, 
-can be found in the docs here - INSERT INTERNAL LINK
+can be found in the docs [here](docs/problem_description.md)
 
 
 
