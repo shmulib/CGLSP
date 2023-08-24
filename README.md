@@ -100,7 +100,6 @@ Ensure the current working directory is the root directory (CGLSP), then execute
 python CGLSP.py <problem_type> <update_frequency>
 
 ```
-
 Arguments: 
 
 - 'problem_type': One of either 'CGLSP' or 'TSPLIB'. Selecting 'CGLSP' will run the solver for the
