@@ -40,17 +40,40 @@ can be found in the docs here - INSERT INTERNAL LINK
 
 ## Installation
 
-Git clone the repo to gain access to the code. I useconda to manage virtual environemnts and have provided
+Git clone the repo to gain access to the code. I use the conda to manage virtual environemnts and have provided
 an environment.yml file to create a conda virtual environment with the required dependencies. I also created a pip
 compatible requirements.txt file in the dependencies directory, but an attempt to create a virtualenv virtual environment using pip failed due to pip being unable to find all required packages.
 
-To clone the repo and setup the required conda virtual enviroment execute the following commands (note the \ for Windows):
+To clone the repo and setup the required conda virtual enviroment execut the following commands:
 
-```
+'''
 git clone https://github.com/shmulib/CGLSP.git
 cd CGLSP
-conda env create -f dependencies\environment.yml
-```
+conda env create -f dependencies\environment.yml'''
+
+## Problem Instances
+
+This CGLSP sequencing problem comes from research Spanish academics conducted to aid a Spanish steel manufacturing company.
+
+I've provided the paper they wrote about their research on the CGLSP problem in the CGLSP_academic research directory of this repo. The paper is the file - Sequencing jobs with asymmetric costs and transition constraints.pdf
+
+The authors also provide 30 real problem instances derived from actual batches of steel coils required to be sequenced at the steel manufacturer.
+
+These 30 instances are provided in this repo in the problem_instances/CGLSP_instances/data directory.
+
+Each problem instance file is labelled cgl_{num_coils}.txt where the num_coils is the number of steel coils required
+to be galvanised in that batch.
+
+The contents of the problem instance files are cost matrices for the batch where entry (i,j) is the cost of sequencing
+coil j directly after coil i. All costs are non-negative except for pairs of coils that can't be sequence directly after
+each other, where the cost is -1 to indicate infeasibility.
+
+Further details of the problem instances are provided in the problem_instances/CGLSP_instaces/README.md file which was
+provided by the Spanish academics who shared the instances publicly.
+
+You can also read about the problem instances in the paper written about the problem instances by these academics which is 
+provided in this repo in CGLSP_academic_research/Problem_instances_dataset_of_a_real-world_sequencing_problem.pdf 
+
 
 ## Usage
 
@@ -67,9 +90,7 @@ Graph theory formulation
 Mathematical description of solution
 Description of how the algorithm is implemented in code -
 
-## Problem Instances
 
- CGLSP and TSPLIB
 
 ## Codebase Structure
 
@@ -87,6 +108,12 @@ Problems encountered - GCGLPS_26 can't find tight enough LBs
 ## Ideas for optimization algorithm improvement
 
 Work still to be done
+
+
+
+
+
+
 
 
 
