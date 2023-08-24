@@ -168,7 +168,7 @@ if __name__ == "__main__":
 
         elif problem_type == "TSPLIB":
 
-            from algorithm_verification.br17 import get_cost_matrix_br17_atsp
+            from src.algorithm_verification.br17 import get_cost_matrix_br17_atsp
             cost_matrix = get_cost_matrix_br17_atsp()
             problem_instance = cost_matrix
 

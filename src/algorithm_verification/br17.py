@@ -31,5 +31,6 @@ def get_cost_matrix_br17_atsp():
     return cost_matrix
 
 
-cost_matrix = get_cost_matrix_br17_atsp()
-print(cost_matrix)
+if __name__ == "__main__":
+    cost_matrix = get_cost_matrix_br17_atsp()
+    print(cost_matrix)
