@@ -165,7 +165,7 @@ Instances attempted to be solved by the solver, but that don't currently termina
 
 ## Ideas for optimization algorithm improvement
 
-Work still to be done
+Work still to be donee
 
 
 
