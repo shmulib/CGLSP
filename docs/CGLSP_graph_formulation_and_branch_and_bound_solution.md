@@ -1,11 +1,33 @@
+# Graph Theoretic Formulation of CGLSP
 
-Problem Description in context
-Graph theory formulation
-Mathematical description of solution
-Description of how the algorithm is implemented in code -
+The CGLSP sequencing problem can be formulated as a graph theory optimization problem of finding a minimum cost Hamiltonian path on an incomplete asymmetric graph, or digraph.
 
+The nodes in the graph are the coils to be sequenced, and the directed edge from node i to node j represents galvansing coil j directly after coil i. The weight of this edge is the cost or wastage inccured when coil j is galvanised directly after coil i. 
 
+The graph is incomplete because not all pairs of coils can be galvanised directly after each other, and therefore there are missing edges in the graph.
 
+The asymmetry arises because the wastage incurred from galvanising coil j directly after coil i, may be different from the wastage incurred from galvansing the pair in the reverse order, i.e. coil i directly after coil j.
+
+A Hamilitonian path in a graph is a path that starts at some node and then travels along the edges of the graph visiting every node without repeating edges. Note, that unlike a Hamiltonian cycle, a Hamiltonian path does not end at the node at which it started.
+
+As there are possibly multiple Hamlitonian paths in a given graph, there exists a graph optimization problem of finding a minimum weight Hamalitonian path in a graph, which means finding a Hamiltonian path, where the sum of the weights of the edges in the path is minimised over all Hamiltonian paths in that graph.
+
+In the context of the (di)graph representing the CGSLP sequencing problem, a Hamiltonian path is a valid sequencing of the coils to be galvanised. A minimum weight Hamiltoninan path in the CGLSP graph represents a valid sequence of coils that incurs the least aggregate wastage.
+
+Hence, by representing the CGLSP sequencing problem using this graph theory formulation, we can find a valid sequence of coils with least aggregate wastage, by finding a minimum weight Hamiltonian path in its graph.
+
+In order to solve this graph theory optimization problem, the optimization problem is transformed into a slightly different optimization problem with the same solution on modified/augmented graph.
+
+The problem of finding a minimum cost Hamiltoniain path on a asymmetric graph is not usually studied directly. Instead, a minimum cost Hamiltonian cycle is sought, i.e. a path that starts and ends at the same node in the graph. However, one can find a minimum cost Hamiltonian path in any graph, just by adding an additional dummy node in the graph and connecting it to all the other nodes (in both directions) with edges with zero weight. A minimum weight Hamiltonian cycle on this graph, can then be trivially converted into a minimum weight Hamiltonian path on the orignal graph.
+
+The problem of finding a minimum weight Hamiltonian cycle on an assymetric graph is more commonly known as the Assymetric Travelling Salesman Problem. This is very well studied problem and many approaches for solving it have been devised.
+
+Usually though, the problem is formulated using complete graphs that ensure a Hamiltonian cycle exists. In an incomplete graph, there is no guarantee that a Hamiltonian cycle exists. The incomplete graph variant is therefore much harder to solve as not only does one have to minimize the cost of the Hamiltonian cycle, but one has to even find Hamiltonian cycles to begin with.
+
+In the next section, we explain the branch and bound algorithm variant the solver implented in this repo uses to find a minimum weight Hamiltonian cycle on the augmented graph with the dummy node, which upon termination finds a minimum weight Hamiltonian path on the original graph and consequently, the optimal sequence for galvanising the coils which has the minimum aggregate wastage.
+
+# Branch and Bound Solution
+ 
 Applied Problem: 
 I found a real sequencing problem for the galvanizing of steel coils. Spanish academics published research about this problem where they were employed by a Spanish steel manufacturer. (I've included the paper in the git repo).
 
