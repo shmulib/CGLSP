@@ -27,35 +27,25 @@ Usually though, the problem is formulated using complete graphs that ensure a Ha
 In the next section, we explain the branch and bound algorithm variant the solver implented in this repo uses to find a minimum weight Hamiltonian cycle on the augmented graph with the dummy node, which upon termination finds a minimum weight Hamiltonian path on the original graph and consequently, the optimal sequence for galvanising the coils which has the minimum aggregate wastage.
 
 # Branch and Bound Solution
- 
-Applied Problem: 
-I found a real sequencing problem for the galvanizing of steel coils. Spanish academics published research about this problem where they were employed by a Spanish steel manufacturer. (I've included the paper in the git repo).
 
-The problem is that a batch of steel coils needs to be treated with a zinc coating. The coils are welded end to end
-and pushed through a continuous production line. The sequence of the coils affects the amount of wastage of steel incurred at the beginning of coating each coil. 
+The optimization approach that we use to solve the CGLSP sequencing problem, upon termination, finds the optimal solution, and is therefore what is known as an "exact" method. The is contrasted to another commonly used class of optimization techniques that aren't guaranteed to find optimal solutions to the problems they are solving, but are usually faster and also are necessary when solving the optimization problem to optimality is intractable.
 
-The reason this wastage occurs is due to the specific parameters of the coating pipeline required for each coil and the requirement that the coils be coated continuously. This creates an avoidable period of transition at the beginning of coating each coil, in which the parameters of the pipeline are gradually modified to the ideal values for the currently being coated coil, from those used/ideal for the previous coil. During this period of transition the coils may not be treated ideally and this may produce inferior or unsaleable steel that has to be sold at much lower rates, if it can be sold at all.
+Specifically, we use a branch and bound algorithm variant. Branch and bound, when it works well, is effectively an efficient search of the solution space. Branch and bound algorithms recursively partition the solution space into smaller subsets of the solution space and solve the optimization problem on those subsets. The partioning is achieved by branching on the subproblem currently being processed. Branching means creating child subproblems that have decision variables fixed in their parent subproblem in such a way that all solutions in the parent subproblem exist collectively in the child subproblems and the solution space of the subproblems are entirely distinct (mutually exclusive) of each other. 
 
-The objective is then, of course, to sequence the coils in such a way as to avoid as much wastage as possible.
+Less abstractedly, in the context of finding a minimum weight Hamiltonian cycle on a graph, subproblems involve finding minimum weight Hamiltonian cycles on the graph where edges of the graph either cannot be part of the Hamiltonian cycles found for that subproblem (excluding edges), or edges of the graph have to be included in the Hamiltonian cycles found for that subproblem (including edges).
 
-The different sequences are associated with varying levels of wastage because the wastage incurred for different consecutive pairs of coils varies. The order within the consecutive pairs, i before j, or vice versa, can also incur different amounts of wastage, i.e. the costs are not symmetric.
+The way that branch and bound can effeciently search the solution space for the optimal solution is by using upper and lower bounds for the optimal solution.
 
-Moreover, not all sequences are allowed as some coils may not be coated consecutively after other coils, due to physical constraints like relative steel grades, etc. I'm not sure if these constraints are also asymmetric in practice.
+An upper bound for the optimal solution (in the case of a minimization problem, like ours) is any feasible solution of the optimization problem. 
 
+Lower bounds for the optimal solution can be obtained by solving a closely related optimization problem to the one trying to be solved in which constraints on the solution space have been relaxed and therefore the feasible solution space for this relateed optimization problem is a superset of the feasible solution space for the original optimization problem.
 
-Graph Theoretic Formulation:
+In the context of the CGLSP, these upper bounds are provided by feasible solutions that are any valid sequence of coils, i.e. sequences that don't contain consecutive pairs of coils that can't physically be galvanised after each other. In the associated augmented graph, this corresponds to any Hamiltonian cycle that exists in the graph. 
 
-
-This sequencing problem can be formulated as finding the miminum cost Hamiltonian path in an incomplete asymmetric weighted graph.
-
-The
+The lower bounds are found by finding the optimal choice of edges in the graph such that every node has an in and out degree of 1, i.e. is connected to exactly two edges, as in a Hamiltonian cycle, but we relax the constraint that this collection of edges needs to form a Hamiltonian cycle. Instead the collection of edges can consist of multiple subcycles in the graph that start and end at the same node, but don't individually visit every node in the graph. As the set of all such collections of edges in the graph that visits every node, where the collections can consists of multiple subcycles, contains within in it the subset of collections where each collection of edeges is a Hamiltonian cycle (a Hamiltonian cylce is just a subcycle that actually visits every node), the minimum weight collection over all collections that consists of subcycles, has a weight that is at least as low as the minimum weight collection that is a Hamiltonian cycle. As such by find this optimal collection of edges that consists of (potentially) multiple collections, we have found a lower bound on the minimum weight Hamiltonian cycle.
 
 
-The theoretical optimization problem can be formulated as finding the minimum cost Hamiltonian path in an asymmetric, incomplete graph.
 
-It's possible to formulate this problem as an Asymmetric Travelling Salesman Problem (ASTP) (min cost Hamiltonain cycle, as opposed to, path) in an incomplete graph, by adding a dummy node (coil) to the graph formulation and adding edges to and from the dummy node to every other node, with zero cost.This reformulation is what I've done in my solution. 
-
-I then solve the resulting ASTP exactly using a branch and bound variant.
 
 Lower Bounding:
 
