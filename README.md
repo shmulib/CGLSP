@@ -63,7 +63,7 @@ conda env create -f dependencies\environment.yml
 
 This CGLSP sequencing problem orginates from research Spanish academics conducted for a Spanish steel manufacturing company.
 
-I've provided the paper they wrote about their research on the CGLSP problem in the [CGLSP_academic_research](docs/) directory of this repo. The paper is the file - Sequencing jobs with asymmetric costs and transition constraints.pdf
+I've provided the paper they wrote about their research on the CGLSP problem in the [CGLSP_academic_research](CGLSP_academic_research/) directory of this repo. The paper is the file - Sequencing jobs with asymmetric costs and transition constraints.pdf
 
 The authors also provide 30 real problem instances derived from actual batches of steel coils required to be sequenced at the steel manufacturer.
 
@@ -165,7 +165,8 @@ Instances attempted to be solved by the solver, but that don't currently termina
 
 ## Ideas for optimization algorithm improvement
 
-Work still to be donee
+Work still to be done
+
 
 
 
