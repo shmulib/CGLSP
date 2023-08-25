@@ -1,5 +1,13 @@
 # CGLSP (Continuous Galvanizing Line Sequencing Problem)
 
+
+The reason this wastage occurs is due to the specific parameters of the coating pipeline required for each coil and the requirement that the coils be coated continuously. This creates an avoidable period of transition at the beginning of coating each coil, in which the parameters of the pipeline are gradually modified to the ideal values for the currently being coated coil, from those used/ideal for the previous coil. During this period of transition the coils may not be treated ideally and this may produce inferior or unsaleable steel that has to be sold at much lower rates, if it can be sold at all.
+
+
+The different sequences are associated with varying levels of wastage because the wastage incurred for different consecutive pairs of coils varies. The order within the consecutive pairs, i before j, or vice versa, can also incur different amounts of wastage, i.e. the costs are not symmetric.
+
+
+
 The CGLSP is a sequencing problem that arises in the final stage production of steel coils. Steel coils can be required
 to galvanised, i.e. coated with a zinc layer to protect them against air and mosture. The steel coils are coated in batches
 where the coils in each batch are welded end to end to produce one continous strip of steel. This strip is then processed
@@ -11,7 +19,7 @@ because the transition period of the line results in the beginning of the next c
 This can produce a section of the coils which is inferior or unsaleable.
 
 However, because of the relative settings required for different pairs of coils, the transition periods can be shortened
-by sequencing the coils such that consecutive pairs of coils have less wastage.
+by sequencing the coils such that consecutive pairs of coils have better relative settings and therefore less wastage.
 
 Addtionally, because of phsyical differences in the individual coils, such as steel grade, some coils cannot be sequenced consecutively after other coils.
 
@@ -55,7 +63,7 @@ conda env create -f dependencies\environment.yml
 
 This CGLSP sequencing problem orginates from research Spanish academics conducted for a Spanish steel manufacturing company.
 
-I've provided the paper they wrote about their research on the CGLSP problem in the CGLSP_academic research directory of this repo. The paper is the file - Sequencing jobs with asymmetric costs and transition constraints.pdf
+I've provided the paper they wrote about their research on the CGLSP problem in the [CGLSP_academic_research](docs/) directory of this repo. The paper is the file - Sequencing jobs with asymmetric costs and transition constraints.pdf
 
 The authors also provide 30 real problem instances derived from actual batches of steel coils required to be sequenced at the steel manufacturer.
 
@@ -127,7 +135,7 @@ I plan to update the command line interface to allow any instance to be selected
 The CGLSP sequencing problem can be formulated as a graph theory optimization problem of finding a minimum cost Hamiltonian path on an incomplete asymmetric graph, or digraph.
 
 The details of this graph theoretic formulation and the description of the branch and bound algorithm
-this solver uses to solve it, will shortly be able to be found in the docs [here](docs/CGLSP_graph_formulation_and_branch_and_bound_solution.md)
+this solver uses to solve it, are described in the the [docs](docs/CGLSP_graph_formulation_and_branch_and_bound_solution.md)
 
 
 ## Codebase Structure
@@ -158,6 +166,26 @@ Instances attempted to be solved by the solver, but that don't currently termina
 ## Ideas for optimization algorithm improvement
 
 Work still to be done
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
