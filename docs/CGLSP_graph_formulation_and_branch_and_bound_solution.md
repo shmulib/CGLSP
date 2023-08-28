@@ -10,7 +10,7 @@ The asymmetry arises because the wastage incurred from galvanising coil j direct
 
 A Hamilitonian path in a graph is a path that starts at some node and then travels along the edges of the graph visiting every node without repeating edges. Note, that unlike a Hamiltonian cycle, a Hamiltonian path does not end at the node at which it started.
 
-As there are possibly multiple Hamlitonian paths in a given graph, there exists a graph optimization problem of finding a minimum weight Hamalitonian path in a graph, which means finding a Hamiltonian path, where the sum of the weights of the edges in the path is minimised over all Hamiltonian paths in that graph.
+As there are possibly multiple Hamlitonian paths in a given graph, there exists a graph optimization problem of finding a minimum weight Hamilitonian path in a graph, which means finding a Hamiltonian path, where the sum of the weights of the edges in the path is minimised over all Hamiltonian paths in that graph.
 
 In the context of the (di)graph representing the CGSLP sequencing problem, a Hamiltonian path is a valid sequencing of the coils to be galvanised. A minimum weight Hamiltoninan path in the CGLSP graph represents a valid sequence of coils that incurs the least aggregate wastage.
 
@@ -24,7 +24,7 @@ The problem of finding a minimum weight Hamiltonian cycle on an assymetric graph
 
 Usually though, the problem is formulated using complete graphs that ensure a Hamiltonian cycle exists. In an incomplete graph, there is no guarantee that a Hamiltonian cycle exists. The incomplete graph variant is therefore much harder to solve as not only does one have to minimize the cost of the Hamiltonian cycle, but one has to even determine if there are any Hamiltonian cycles in the graph.
 
-In the next section, we explain the branch and bound algorithm variant the solver implented in this repo uses to find a minimum weight Hamiltonian cycle on the augmented graph with the dummy node (coil), which upon termination finds a minimum weight Hamiltonian path on the original graph, and consequently, the optimal sequence for galvanising the coils with the minimum aggregate wastage.
+In the next section, we explain the branch and bound algorithm variant, the solver implented in this repo, uses to find a minimum weight Hamiltonian cycle on the augmented graph with the dummy node (coil).  Upon termination the solver uses this Hamiltonian cycle to extract a minimum weight Hamiltonian path on the original graph, and consequently, finds the optimal sequence for galvanising the coils with the minimum aggregate wastage.
 
 # Branch and Bound Solution
 
@@ -66,4 +66,3 @@ The cost of the optimal solution of the Modified Assignment Problem is an upper 
 Branching:
 
 Choice of decision variables to branch on:
-
