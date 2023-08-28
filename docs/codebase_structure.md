@@ -12,7 +12,7 @@ The codebase consists of the following scripts:
 
 The problem instances are located in subdirectories under the "problem_instances" directory:
 
-- CGLSP instances: CGLSP_instances/data
+- CGLSP instances: CGLSP_instances/data/
 - TSPLIB instances: TSPLIB_instances/
 
 
