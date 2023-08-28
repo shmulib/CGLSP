@@ -61,7 +61,7 @@ The Node instances implement the methods for lower bounding the subproblems as w
 
 For lower bounding (the subproblem), the Node instances implement both cost reduction lower bound and lower bounding via solving a relaxtion of the CGLSP optimization problem 
 
-The relaxation lower bound, as described [here](docs/CGLSP_graph_formulation_and_branch_and_bound_solution.md) in the "Branch and Bound" solution section, involves solving the Modified Assignment Problem for this subproblem.
+The relaxation lower bound, as described [here](CGLSP_graph_formulation_and_branch_and_bound_solution.md) in the "Branch and Bound" solution section, involves solving the Modified Assignment Problem for this subproblem.
 
 Solving the Modified Assignment Problem for the subproblem both produces a lower bound (potentially tighter than by cost reduction lower bounding), as well as generates upper bounds for the CGLSP full optimization problem, where the MAP optimal solution for the subproblem is CGLSP feasible.
 
