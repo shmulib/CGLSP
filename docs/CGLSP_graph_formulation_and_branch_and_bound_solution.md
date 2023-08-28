@@ -1,4 +1,4 @@
-# Structure of the CCGLSP Solver Codebase
+# Structure of the CGLSP Solver Codebase
 
 The CGLSP solver codebase's structure mirrors the structure of the branch and bound algorithm variant the solver uses to solve the CGLSP sequencing problem formulated as a [graph optimization problem](CGLSP_graph_formulation_and_branch_and_bound_solution.md)
 
