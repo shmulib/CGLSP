@@ -1,6 +1,6 @@
 # Structure of the CGLSP Solver Codebase
 
-The CGLSP solver's codebase's structure mirrors the structure of the branch and bound algorithm variant the solver implements. You can read about the branch and bound algorithm [here](GLSP_graph_formulation_and_branch_and_bound_solution.md)
+The CGLSP solver's codebase's structure mirrors the structure of the branch and bound algorithm variant the solver implements. You can read about the branch and bound algorithm [here](CGLSP_graph_formulation_and_branch_and_bound_solution.md)
 
 The codebase consists of the following scripts:
 
