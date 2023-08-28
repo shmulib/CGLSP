@@ -20,7 +20,7 @@ The problem instances are located in subdirectories under the "problem_instances
 
 The CGLSP.py script is the entry point to using the solver to solve a CGLSP problem instance. This script contains the CGLSP class which orchestrates the solving of a CGLSP (or equivlent theoretical problem) instance. 
 
-To instatiate the CGLSP class, one needs to pass a problem instance. Currently the CGLSP problem instances are pass as file paths to CGLSP solver class, which then uses the instance_parser.py script to parse the CGLSP problem instance file, returning the cost matrix for that problem instance.
+To instatiate the CGLSP class, one needs to pass a problem instance. Currently the CGLSP problem instances are passed as file paths to CGLSP solver class, which then uses the instance_parser.py script to parse the CGLSP problem instance file, returning the cost matrix for that problem instance.
 
 The CGLSP instance class then creates an instance of the BnB_Tree class as an instance variable which can then be used to execute the branch and bound which is initiated by calling the CGLSP.solve method.
 
