@@ -157,7 +157,69 @@ Instances attempted to be solved by the solver, but that don't currently termina
 
 ## Ideas for optimization algorithm improvement
 
-Work still to be done
+The currently implemented CGLSP solver, with the version of the branch and bound algorithm variant it uses, is able to solve to optimality the smallest of the CGLSP instances provided by the Spanish academics who originated the CGLSP problem. The larger instances are currently not tractable for the solver - the branch and bound tree grows very large and it is not clear the branch and bound search would terminate without almost exhaustively searching the entire solution space.
+
+To some extent, this reflects the underlying difficulty of the CGLSP problem, which requires finding a minimum cost Hamiltonian cycle (on an augmented graph) which is both asymmetric and possibly incomplete (missing edges) in ways that result in finding minimum cost Hamiltonian cycles very difficult.
+
+The solution approach of the Spanish academics who originated the problem reflects this difficulty as they did not attempt to solve the provided CGLSP instances to optimality, they instead implemented novel Ant Colony based heuristic solution approaches that attempt to find quailty, but not optimal solutions.
+
+That being said, they emphasised the practical constraint, of needing to solve the CGLSP problem instances very quickly as well. It therefore might be possible to solve all the instances to optimality with a less constrainted solving time budget.
+
+Even if that were not the case, and some of the problem instances that they provided can't be solved to optimality, with any known technique, in a practical time frame of any duration, it may be possible to solve a non-negligble proportion of the provided CGLSP problem instances to optimality, using sophisticated exact methods, and allowing a less constrained solving time then that used by the Spanish academics.
+
+The proposed improvements that I believe may allow for the exact solution of at least some (more) of the CGLSP instances, within a reasonable time frame, are;
+
+- Implementing lower bounding for the suproblems using both cost reduction, as well as the currently implemented use of the Modified Assignment Problem lower bound
+    - The use of an additional lower bounding method may result in obtaining tighter lower bounds on the subproblems, and hence allow some additional subproblems to be pruned, instead of branched on, hence reducing the number of subproblems explored and potentially (greatly) improving the efficiency of the branch and bound search
+- Improvements to the branching strategy, specifically, which subproblems are created
+    - Currently the Modified Assignment Solution optimal solution for a subproblem is utilised to create the child subproblems of that subproblem (where the subproblem can't be pruned). The not already included edges (in the subproblem) of the subtour of optimal MAP solution, that has the least edges in common with the already included edges of the subproblem, are used to fix, include and exclude, edges in the child subproblems. The child subproblems however are not symmetric in that there is a genuine choice to be made about which of these branching edges are included/excluded in the individual child subproblems. How this choice is made determines which subproblems are created, and hence potentially a bearing on whether those child supbroblems will be pruned, or perhaps more importantly, whether they will generate feasible solutions to CGLSP that are fairly optimal and can be used to great advantage to prune large parts of the branch and bound tree. 
+    - The current choice of branching edges of this subtour is made arbitrarily, but there is research that has developed criteria for how to fix the branching edges in the subproblems. By implenting this criteria in the creation of subproblems in the branching implemented in this solver, the efficiency of the branch and bound search, could potentially be vastly improved.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
