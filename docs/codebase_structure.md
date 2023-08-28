@@ -55,7 +55,7 @@ This process is continued until all subproblems created are either pruned or don
 At this point the BnB_Tree.solve method returns the optimal solution to the CGLSP problem instance.
 
 
-# node.py
+## node.py
 
 The node.py script contains the Node class which implements the subproblems that are explored in the branch and bound tree.
 
@@ -74,7 +74,7 @@ The BnB_Tree object will call the MAP_sol_CGSLP_feasible method of the Node for 
 After the subproblems have been lower bounded, the BnB_Tree will compare the best found lower bound on the subproblem, to the best upper bound found so far, to determine whether the subproblem can be pruned, not branched on, or will require branching.
 
 
-# MAP_solver.py
+## MAP_solver.py
 
 For each subproblem explored in the branch and bound tree, the Modified Assignment Problem (MAP) optimization problem, i.e a relaxation of the CGLSP optimiztion problem will be solved for that subproblem (if the subproblem hasn't already been pruned from the branch and bound tree)
 
@@ -83,6 +83,8 @@ The Node class includes a solve_MAP method that initiates the solving of the MAP
 This function utilizes the Linear Sum Assignment Solver provided by the Google OR-Tools python package to solve the MAP optimization problem for each subproblem.
 
 This Google OR-Tools Linear Sum Assignment solver is an implementation of the efficient cost-scaling push-relabel algorithm for the assignment problem (minimum-cost perfect bipartite matching), from  the paper of Goldberg and Kennedy (1995).
+
+
 
 
 
