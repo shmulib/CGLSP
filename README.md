@@ -2,7 +2,7 @@
 
 This CGLSP sequencing problem orginates from research Spanish academics conducted for a Spanish steel manufacturing company.
 
-I've provided the paper they wrote about their research on the CGLSP problem in the [CGLSP_academic_research](CLGLSP_academic_research/) directory of this repo. The paper is the file - Sequencing jobs with asymmetric costs and transition constraints.
+I've provided the paper they wrote about their research on the CGLSP problem in the [CGLSP_academic_research](CGLSP_academic_research/) directory of this repo. The paper is the file - Sequencing jobs with asymmetric costs and transition constraints.
 
 The CGLSP is a sequencing problem that arises in the final stage production of steel coils. Steel coils can be required
 to galvanised, i.e. coated with a zinc layer to protect them against air and mosture. The steel coils are coated in batches
